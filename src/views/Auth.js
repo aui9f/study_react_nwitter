@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { async } from "@firebase/util";
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -40,6 +42,14 @@ const Auth = () => {
     }
     
   }
+
+  const onGoogleClick = async() => {
+    const provider = new GoogleAuthProvider();  
+    const auth = getAuth();
+    const test = await signInWithPopup(auth, provider);
+    console.log(test)
+
+  }
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -52,7 +62,7 @@ const Auth = () => {
 
 
       <div>
-        <button>Continue with Google</button>
+        <button name="google" onClick={onGoogleClick}>Continue with Google</button>
       </div>
     </div>
   )
