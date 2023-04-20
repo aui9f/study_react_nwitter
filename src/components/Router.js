@@ -1,24 +1,41 @@
-import {useState} from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Auth from '../views/Auth';
 import Home from '../views/Home';
+import Navigation from 'components/Navigation';
+import Profile from 'views/Profile';
 
 const AppRouter = ({isLoggedIn}) => {
-    
+    // v5: Redirect
+    // v6: Navigate -- <Route path="*" element={<Navigate to="/" replace />}
     return (
         <Router>
+            {isLoggedIn && <Navigation/>}
             <Routes>
                 {isLoggedIn ? 
                     (
-                        <Route path="/" element={<Home />} />
-                        // <Route exact path="/"><Home/></Route>
+                        <>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/profile" element={<Profile />} />
+                            <Route
+                            path="*"
+                            element={<Navigate to="/" replace />}
+                        />
+                        </>
                     )
                     :
                     (
                         <Route path="/" element={<Auth />} />
-                        // <Route exact path="/"><Auth/></Route>  
+                        
                     )}
+                    {/* <Route
+                                path="*"
+                                element={<Navigate to="/" replace />}
+                            /> */}
+                    
+                    
             </Routes>
+            
         </Router>
 
     )
