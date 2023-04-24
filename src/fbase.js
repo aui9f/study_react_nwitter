@@ -15,6 +15,9 @@ import {
   deleteDoc, updateDoc
 } from "firebase/firestore";
 
+//스토리지(사진)
+import { ref, getStorage, uploadString, getDownloadURL, deleteObject } from "firebase/storage";
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -30,9 +33,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 export {
   auth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut,
   getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  db, collection, addDoc, getDocs, doc, onSnapshot, deleteDoc, updateDoc
+  db, collection, addDoc, getDocs, doc, onSnapshot, deleteDoc, updateDoc,
+  ref, storage, getStorage, uploadString, getDownloadURL, deleteObject
 }

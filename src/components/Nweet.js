@@ -1,4 +1,4 @@
-import {db, doc, deleteDoc, updateDoc} from 'fbase';
+import {db, doc, deleteDoc, updateDoc, ref, storage, deleteObject} from 'fbase';
 import { useState } from 'react';
 
 const Nweet = ({nweet, isUpdate}) => {
@@ -8,6 +8,20 @@ const Nweet = ({nweet, isUpdate}) => {
     const deleteNweet = async () => {
         if(window.confirm('삭제하시겠습니까?')){
             await deleteDoc(doc(db, 'nweets', nweet.id));
+            if(nweet.attachmentUrl){
+                
+                
+
+                // Create a reference to the file to delete
+                const desertRef = ref(storage, nweet.attachmentUrl);
+
+                // Delete the file
+                deleteObject(desertRef).then(() => {
+                // File deleted successfully
+                }).catch((error) => {
+                // Uh-oh, an error occurred!
+                });
+            }
             
 
         }
@@ -38,15 +52,17 @@ const Nweet = ({nweet, isUpdate}) => {
                <button onClick={toggleEditing}>Cancel</button>
                <input type="submit" value="Update"/>
            </form>):(
-                <div>
-            <h5>- {nweet.text}</h5>
-            {isUpdate && (
-                <>
-                    <button onClick={toggleEditing}>Edit</button>
-                    <button onClick={deleteNweet}>DELETE</button>
-                </>
-            )}
-        </div>
+            <div>   
+                <h5>- {nweet.text}</h5>
+                {nweet.attachmentUrl && (<img src={nweet.attachmentUrl} width="120px" height="120px"/>)}
+            
+                {isUpdate && (
+                    <>
+                        <button onClick={toggleEditing}>Edit</button>
+                        <button onClick={deleteNweet}>DELETE</button>
+                    </>
+                )}
+            </div>
            )}
        </div>
     )
