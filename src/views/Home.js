@@ -1,24 +1,18 @@
 import { useEffect, useState } from "react";
-import { db, collection, addDoc, getDocs } from 'fbase';
+import { db, collection, addDoc, getDocs, doc, onSnapshot } from 'fbase';
 
 const Home = ({useObj}) => {
     const [nweet, setNweet] = useState('');
     const [nweets, setNweets] = useState([]);
     
-    
-    const getNweets = async () => {
-        console.log('=====getNweets=====')
-        const dbNweets = await getDocs(collection(db, "nweets")); 
-        console.log("[[dbNweets]]", dbNweets)
-        dbNweets.forEach(x=>{
-            const nweetObj = {...x.data(), id:x.id};
-            setNweets(prev=>[nweetObj, ...prev]);
-        })
-
-        console.log(nweets.length, nweets)
-        
-
-    }
+    // 파이어스토어를 통한 데이터 출력
+    // const getNweets = async () => {
+    //     const dbNweets = await getDocs(collection(db, "nweets")); 
+    //     dbNweets.forEach(x=>{
+    //         const nweetObj = {...x.data(), id:x.id};
+    //         setNweets(prev=>[nweetObj, ...prev]);
+    //     })
+    // }
 
     const onSubmit = async (event) => {
         event.preventDefault();
@@ -45,7 +39,16 @@ const Home = ({useObj}) => {
     }
 
     useEffect(()=>{
-        getNweets();
+        // getNweets();
+        //실시간 데이터베이스 도입 (onSnapshot)
+        
+        onSnapshot(collection(db, "nweets"), (querySnapshot) => {
+            const nweetsArr = [];
+            querySnapshot.forEach((doc) => {
+                nweetsArr.push(doc.data())
+            });
+            setNweets(nweetsArr)
+        });
     }, []);
 
     return (
