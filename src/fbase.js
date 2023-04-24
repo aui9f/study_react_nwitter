@@ -8,7 +8,7 @@ import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signO
 import { 
   getFirestore, collection, addDoc, getDocs, 
   doc, onSnapshot ,
-  deleteDoc,
+  deleteDoc, updateDoc
 } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -29,5 +29,5 @@ const db = getFirestore(app);
 
 export {
   auth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut,
-  db, collection, addDoc, getDocs, doc, onSnapshot, deleteDoc
+  db, collection, addDoc, getDocs, doc, onSnapshot, deleteDoc, updateDoc
 }
