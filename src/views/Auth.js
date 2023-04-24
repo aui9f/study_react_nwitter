@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { async } from "@firebase/util";
+
+import { auth, getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'fbase'
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -25,16 +24,24 @@ const Auth = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    let data;
     
     try {
       const auth = getAuth();
       if(newAccount){
         console.log("[email, pw]", email, pw)
-        data = await createUserWithEmailAndPassword(auth, email, pw);
-        console.log('[data] ',data)
+        await createUserWithEmailAndPassword(auth, email, pw);
       }else{
+
         //로그인
+        signInWithEmailAndPassword(auth, email, pw).then((userCredential) => {
+        // Signed in
+        // const user = userCredential.user;
+  
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
       }
     } catch (error) {
       console.log("error", error.message)

@@ -6,6 +6,7 @@ import Navigation from 'components/Navigation';
 import Profile from 'views/Profile';
 
 const AppRouter = ({isLoggedIn, useObj}) => {
+    
     // v5: Redirect
     // v6: Navigate -- <Route path="*" element={<Navigate to="/" replace />}
     return (
