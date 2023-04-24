@@ -5,7 +5,11 @@ import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signO
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 //
-import { getFirestore, collection, addDoc, getDocs, doc, onSnapshot } from "firebase/firestore";
+import { 
+  getFirestore, collection, addDoc, getDocs, 
+  doc, onSnapshot ,
+  deleteDoc,
+} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -25,5 +29,5 @@ const db = getFirestore(app);
 
 export {
   auth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut,
-  db, collection, addDoc, getDocs, doc, onSnapshot
+  db, collection, addDoc, getDocs, doc, onSnapshot, deleteDoc
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { db, collection, addDoc, getDocs, doc, onSnapshot } from 'fbase';
+import Nweet from 'components/Nweet';
 
 const Home = ({useObj}) => {
     const [nweet, setNweet] = useState('');
@@ -45,7 +46,7 @@ const Home = ({useObj}) => {
         onSnapshot(collection(db, "nweets"), (querySnapshot) => {
             const nweetsArr = [];
             querySnapshot.forEach((doc) => {
-                nweetsArr.push(doc.data())
+                nweetsArr.push({...doc.data(), id: doc.id})
             });
             setNweets(nweetsArr)
         });
@@ -60,9 +61,10 @@ const Home = ({useObj}) => {
             <hr/>
             <div>
                 {nweets.map(x=>(
-                    <div key={x.id}>
-                        <p>{x.text || '-'}</p>
-                    </div>
+                    // <div key={x.id}>
+                    //     <p>{x.text || '-'}</p>
+                    // </div>
+                    <Nweet key={x.id} nweet={x} isUpdate={x.creatorId===useObj.uid}/>
                 ))}
             </div>
         </>
