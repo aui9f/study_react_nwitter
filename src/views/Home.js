@@ -27,15 +27,16 @@ const Home = ({useObj}) => {
 
         //사진 파일 유무와 상관없이 레퍼런스를 생성하는걸 방지
         let attachmentUrl = '';
-        if(attachmentUrl!==''){
+        if(attr!==''){
              // Create a root reference
             const storage = getStorage();
             const mountainsRef = ref(storage, `${useObj.uid}/${uuidv4()}`);
             const response = await uploadString(mountainsRef, attr, 'data_url');
             // const url = await getDownloadURL(ref(storage, `${useObj.uid}/${uuidv4()}`));
             attachmentUrl = await getDownloadURL(response.ref);
+            console.log("attachmentUrl", attachmentUrl)
         }
-      
+      console.log(attachmentUrl);
        
           
         try {

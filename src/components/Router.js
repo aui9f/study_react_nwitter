@@ -17,7 +17,7 @@ const AppRouter = ({isLoggedIn, useObj}) => {
                     (
                         <>
                             <Route path="/" element={<Home useObj={useObj} />} />
-                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/profile" element={<Profile useObj={useObj} />} />
                             <Route
                             path="*"
                             element={<Navigate to="/" replace />}

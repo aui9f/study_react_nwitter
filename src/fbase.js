@@ -12,7 +12,8 @@ import {
 import { 
   getFirestore, collection, addDoc, getDocs, 
   doc, onSnapshot ,
-  deleteDoc, updateDoc
+  deleteDoc, updateDoc,
+  query, where, orderBy
 } from "firebase/firestore";
 
 //스토리지(사진)
@@ -38,6 +39,6 @@ const storage = getStorage(app);
 export {
   auth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut,
   getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  db, collection, addDoc, getDocs, doc, onSnapshot, deleteDoc, updateDoc,
+  db, collection, addDoc, getDocs, doc, onSnapshot, deleteDoc, updateDoc, query, where, orderBy,
   ref, storage, getStorage, uploadString, getDownloadURL, deleteObject
 }
