@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import AppRouter from 'components/Router'
-import { auth, onAuthStateChanged } from "fbase";
+import { auth, getAuth, onAuthStateChanged } from "fbase";
 
 function App() {
   const [init, setInit] = useState(false)
@@ -26,9 +26,17 @@ function App() {
 
 
   },[]);
+
+  const refreshUser = () => {
+    
+    
+    setUserObj({...getAuth().currentUser});
+    console.log(">>>", useObj)
+  };
+
   return (
     <>
-      {init?<AppRouter isLoggedIn={isLoggedIn} useObj={useObj}/>:'initializing..'}
+      {init?<AppRouter refreshUser={refreshUser} isLoggedIn={Boolean(useObj)} useObj={useObj}/>:'initializing..'}
       <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
     </>
   );

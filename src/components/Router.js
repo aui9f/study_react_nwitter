@@ -5,22 +5,22 @@ import Home from '../views/Home';
 import Navigation from 'components/Navigation';
 import Profile from 'views/Profile';
 
-const AppRouter = ({isLoggedIn, useObj}) => {
+const AppRouter = ({isLoggedIn, useObj, refreshUser}) => {
     
     // v5: Redirect
     // v6: Navigate -- <Route path="*" element={<Navigate to="/" replace />}
     return (
         <Router>
-            {isLoggedIn && <Navigation/>}
+            {isLoggedIn && <Navigation userObj={useObj}/>}
             <Routes>
                 {isLoggedIn ? 
                     (
                         <>
                             <Route path="/" element={<Home useObj={useObj} />} />
-                            <Route path="/profile" element={<Profile useObj={useObj} />} />
+                            <Route path="/profile" element={<Profile refreshUser={refreshUser} useObj={useObj} />} />
                             <Route
                             path="*"
-                            element={<Navigate to="/" replace />}
+                            element={<Navigate to="/" userObj={useObj} replace />}
                         />
                         </>
                     )

@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom';
 
-const Navigation = () => {
+const Navigation = ({userObj}) => {
+    console.log(userObj)
 
     return (
         <nav>
@@ -9,7 +10,7 @@ const Navigation = () => {
                     <Link to="/">HOME</Link>
                 </li>
                 <li>
-                    <Link to="/profile">MY PROFILE</Link>
+                    <Link to="/profile">{userObj?.displayName||'-'} MY PROFILE</Link>
                 </li>
             </ul>
         </nav>
