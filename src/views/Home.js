@@ -100,22 +100,22 @@ const Home = ({useObj}) => {
 
     return (
         <>
-            <form onSubmit={onSubmit}>
+            {/* <form onSubmit={onSubmit}>
 
                 <input type="test" value={nweet} onChange={onChange} placeholder="What's on your mind?" maxLength={120}/>
                 <input type="file" accept="image/*" onChange={onFileChange}/>
                 {attr && <div><img src={attr} width="50px" height="50px"/><button onClick={onClearAttr}>Clear</button></div>}
                 <input type="submit" value="OK"/>
             </form>
-            <hr/>
-            <div>
+            <hr/> */}
+            <ul className="tweet-list">
                 {nweets.map(x=>(
                     // <div key={x.id}>
                     //     <p>{x.text || '-'}</p>
                     // </div>
                     <Nweet key={x.id} nweet={x} isUpdate={x.creatorId===useObj.uid}/>
                 ))}
-            </div>
+            </ul>
         </>
     );
 }

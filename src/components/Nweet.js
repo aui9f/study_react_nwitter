@@ -45,26 +45,41 @@ const Nweet = ({nweet, isUpdate}) => {
     const toggleEditing = () => setEditing(prev=>!prev);
 
     return (
-       <div>
+       <li>
            {editing?(
            <form onSubmit={onSubmit}>
                <input type="text" value={newNweet} onChange={onChange} required/>
                <button onClick={toggleEditing}>Cancel</button>
                <input type="submit" value="Update"/>
            </form>):(
-            <div>   
-                <h5>- {nweet.text}</h5>
-                {nweet.attachmentUrl && (<img src={nweet.attachmentUrl} width="120px" height="120px"/>)}
+            <div>
+                <div className="user-photo"></div>
+                <div className="txt">
+                    <div className="header">
+                        <p><span>Nickname</span> @userid * Date</p>
+                        <div className="options">
+                            <div className="icon i-edit"></div>
+                            <div className="icon i-delete"></div>
+                        </div>
+                    </div>
+                    <p>{nweet.text}</p>
+                    
+                    {nweet.attachmentUrl && (<div className="images"><img src={nweet.attachmentUrl} /></div>)}
+                    {/* width="120px" height="120px" */}
+                    
+                </div>
+                
+                
             
-                {isUpdate && (
+                {/* {isUpdate && (
                     <>
                         <button onClick={toggleEditing}>Edit</button>
                         <button onClick={deleteNweet}>DELETE</button>
                     </>
-                )}
+                )} */}
             </div>
            )}
-       </div>
+       </li>
     )
 }
 

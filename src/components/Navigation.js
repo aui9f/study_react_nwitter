@@ -1,16 +1,18 @@
 import {Link} from 'react-router-dom';
 
 const Navigation = ({userObj}) => {
-    console.log(userObj)
-
     return (
         <nav>
             <ul>
-                <li>
-                    <Link to="/">HOME</Link>
+                <li className='logo'></li>
+                <li className="home">
+                    <Link to="/"></Link>
                 </li>
-                <li>
-                    <Link to="/profile">{userObj?.displayName||'-'} MY PROFILE</Link>
+                <li className='notice'></li>
+                
+                <li className="tweet"></li>
+                <li className="profile">
+                    <Link to="/profile"></Link>
                 </li>
             </ul>
         </nav>

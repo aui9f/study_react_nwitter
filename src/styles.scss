@@ -1,0 +1,250 @@
+*{
+    padding:0;
+    border:0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+$blue: rgb(29, 155, 240);
+
+$gray-100: #eeeeee;
+$gray-200: #dddddd;
+$gray-300: #cccccc;
+$gray-400: #bbbbbb;
+$gray-500: #aaaaaa;
+$gray-600: #888888;
+$gray-700: #666666;
+$gray-800: #444444;
+$gray-900: #222222;
+
+@mixin size($width, $height) {
+    width: $width;
+    height: $height
+}
+
+@mixin positions($position, $top: unset, $right: unset, $bottom: unset, $left: unset) {
+    position: $position;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+@mixin flexs($col:unset, $row:unset, $direction:unset, $wrap:unset) {
+    display: flex;
+    align-items: $col; //정렬
+    justify-content: $row; //가로 정렬
+    flex-direction: $direction; //세로
+    flex-wrap: $wrap;
+}
+
+@mixin flexs-align($col:center, $row:flex-start) {
+    display: flex;
+    align-items: $col; //정렬
+    justify-content: $row; //가로 정렬
+}
+
+@mixin flexs-direction($direction:column, $wrap:unset) {
+    //줄바꿈  @include flexs-direction(row, wrap)
+    display: flex;
+    flex-direction: $direction; //세로
+    flex-wrap: $wrap;
+}
+
+@mixin bg($size, $x: center, $y: center) {
+    background-size: $size;
+    background-position-x: $x;
+    background-position-y: $y;
+    background-repeat: no-repeat;
+}
+
+@mixin icon( $icon) {
+    background-image: url('images/'+$icon+'.png');
+  }
+
+  ul{
+    list-style: none;
+  }
+
+input{
+    border: 1px solid $gray-400;
+    @include size(100%, 40px);
+    padding: 0 8px;
+}
+
+#page{
+    @include size(100vw, 100vh);
+    display: flex;
+    >nav{
+        width: 80px;
+        border-right: 1px solid $gray-600;
+        position: relative;
+        ul{
+            li{
+                @include size(48px, 48px);
+                @include bg(20px);
+                margin: 12px auto;
+                border-radius: 100%;
+                &.logo{
+                    @include icon(twitter);
+                }
+                &.home{
+                    @include icon(home);
+                }
+                &.notice{
+                    @include icon(notice);
+                }
+                &.profile{
+                    // @include icon(logo);
+                    flex: 1;
+                    background-color: gray;
+                    position: absolute;
+                    bottom: 6px;
+                    left: 16px;
+                }
+                &.tweet{
+                    background-color: $blue;
+                    @include icon(pen);
+                }
+
+            }
+        }
+    }
+    >.routes-page{
+        flex: 1;
+    }
+
+}
+#login-page{
+    padding: 12px;
+    @include size(100vw, 100vh);
+    @include flexs(center, center, column);
+    >div, >ul, >form{
+        padding: 0 40px;
+    }
+    form{
+        width: 100%;
+        max-width: 375px;
+        
+        // border: 1px solid $gray-200;
+        .logo{
+            @include size(100%, 48px);
+            @include bg(40px);
+            margin-bottom: 8px;
+        }
+        input{
+            margin-top: 8px;
+            &[type=submit]{
+                background-color: $blue;
+                color: #ffffff;
+                border: 1px solid $blue;
+            }
+        }
+    }
+
+    
+    .line{
+        width: 375px;
+        display: flex;
+        align-items: center;
+        margin: 16px 0;
+        >div{
+            flex: 1;
+            border-bottom: 1px solid $gray-400;
+            &:nth-child(2){
+                flex: unset;
+                border-bottom: 0;
+                text-align: center;
+                margin: 0 12px;
+                color: $gray-600;
+            }
+        }
+    }
+
+    >ul{
+        width: 100%;
+        max-width: 375px;
+        >li{
+            border: 1px solid $gray-200;
+            margin-bottom: 8px;
+            height: 40px;
+            @include flexs-align(center, center);
+            border-radius: 20px;
+            
+            .icon{
+                @include size(40px, 40px);
+                @include bg(16px);
+            }
+            p{
+                font-size: 80%;
+            }
+        }
+    }
+
+        .signup{
+            margin-top: 12px;
+            font-size: 80%;
+            p{
+                color: $gray-400;
+                span{
+                    color: $blue;
+                    font-weight: bold;
+                }
+            }
+        }
+}
+
+.tweet-list{
+    >li{
+        padding: 8px;
+        border-bottom: 1px solid $gray-300;
+        >div{
+            display: flex;
+            .user-photo{
+                @include size(40px, 40px);
+                border-radius: 100%;
+                background-color: $gray-200;margin-right: 8px;
+            }
+            .txt{
+                .header{
+                    margin-bottom: 4px;
+                    p{
+                        span{
+                            font-weight: bold;
+                        }
+                    }
+                }
+                >p{
+                    color: $gray-700;
+                }
+                >.images{
+                    margin-top: 4px;
+                    img{
+                        border-radius: 8px;
+                        @include size(160px, 160px);
+                        margin-left: 6px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.icon{
+    &.i-logo{
+        @include icon(twitter)
+    }
+    &.i-google{
+        @include icon(google)
+    }
+    &.i-apple{
+        @include icon(apple)
+    }
+    &.i-naver{
+        @include icon(naver)
+    }
+    &.i-kakao{
+        @include icon(kakao)
+    }
+
+}

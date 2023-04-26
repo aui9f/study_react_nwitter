@@ -10,34 +10,38 @@ const AppRouter = ({isLoggedIn, useObj, refreshUser}) => {
     // v5: Redirect
     // v6: Navigate -- <Route path="*" element={<Navigate to="/" replace />}
     return (
-        <Router>
-            {isLoggedIn && <Navigation userObj={useObj}/>}
-            <Routes>
-                {isLoggedIn ? 
-                    (
-                        <>
-                            <Route path="/" element={<Home useObj={useObj} />} />
-                            <Route path="/profile" element={<Profile refreshUser={refreshUser} useObj={useObj} />} />
-                            <Route
-                            path="*"
-                            element={<Navigate to="/" userObj={useObj} replace />}
-                        />
-                        </>
-                    )
-                    :
-                    (
-                        <Route path="/" element={<Auth />} />
-                        
-                    )}
-                    {/* <Route
+        <div id="page">
+            <Router>
+                {isLoggedIn && <Navigation userObj={useObj}/>}
+                <div className="routes-page">
+                <Routes>
+                    {isLoggedIn ? 
+                        (
+                            <>
+                                <Route path="/" element={<Home useObj={useObj} />} />
+                                <Route path="/profile" element={<Profile refreshUser={refreshUser} useObj={useObj} />} />
+                                <Route
                                 path="*"
-                                element={<Navigate to="/" replace />}
-                            /> */}
-                    
-                    
-            </Routes>
-            
-        </Router>
+                                element={<Navigate to="/" userObj={useObj} replace />}
+                            />
+                            </>
+                        )
+                        :
+                        (
+                            <Route path="/" element={<Auth />} />
+                            
+                        )}
+                        {/* <Route
+                                    path="*"
+                                    element={<Navigate to="/" replace />}
+                                /> */}
+                        
+                        
+                </Routes>
+                </div>
+                
+            </Router>
+        </div>
 
     )
   }

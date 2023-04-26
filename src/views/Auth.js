@@ -5,7 +5,7 @@ import { auth, getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmail
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
-  const [newAccount, setNewAccount] = useState(true);
+  const [newAccount, setNewAccount] = useState(false);
   const [error, setError] = useState('');
 
   const onChange = event => {
@@ -58,18 +58,33 @@ const Auth = () => {
 
   }
   return (
-    <div>
+    <div id="login-page">
+      
       <form onSubmit={onSubmit}>
+        <div className="logo icon i-logo"></div>
         <input type="email" name="email" value={email} placeholder="Email" onChange={onChange} required />
         <input type="password" name="pw" value={pw} placeholder="password" onChange={onChange} required />
         <input type="submit" value={newAccount?'회원가입':'로그인'}/>
         <p>{error}</p>
       </form>
-      <span onClick={toggleAccount}>{newAccount?'로그인하기':'회원가입하기'}</span>
+
+      <div className="line">
+        <div></div>
+        <div><p>또는</p></div>
+        <div></div>
+      </div>
+      {/* <span onClick={toggleAccount}>{newAccount?'로그인하기':'회원가입하기'}</span> */}
 
 
-      <div>
-        <button name="google" onClick={onGoogleClick}>Continue with Google</button>
+      <ul>
+        <li onClick={onGoogleClick}><div className="icon i-google"></div><p>Google 로 로그인하기</p></li>
+        <li><div className="icon i-apple"></div><p>Apple 로 로그인하기</p></li>
+        <li><div className="icon i-naver"></div><p>Naver 로 로그인하기</p></li>
+        <li><div className="icon i-kakao"></div><p>Kakao 로 로그인하기</p></li>
+      </ul>
+
+      <div className="signup">
+        <p>계정이 없으신가요? <span>가입하기</span></p>
       </div>
     </div>
   )
